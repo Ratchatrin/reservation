@@ -57,10 +57,20 @@ function Nav() {
                   </li>
                 </Link>
                 <li>
-                  <a>Food</a>
+                  <a
+                    href="https://i.pinimg.com/564x/00/3f/64/003f64625fd41adbf8f8742b3efe0209.jpg"
+                    target="_blank"
+                  >
+                    Food
+                  </a>
                 </li>
                 <li>
-                  <a>Drinks</a>
+                  <a
+                    href="https://i.pinimg.com/564x/59/f6/95/59f695029a952c355f4a4b253fd3be26.jpg"
+                    target="_blank"
+                  >
+                    Drinks
+                  </a>
                 </li>
                 <li>
                   <a>Location</a>
