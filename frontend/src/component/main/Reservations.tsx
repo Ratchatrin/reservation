@@ -52,7 +52,7 @@ function Reservations() {
       };
 
       const respond = await axios.post(
-        "http://localhost:3002/reserved",
+        "https://reservation-snjh.onrender.com/reserved",
         reservationDate
       );
       setCustomerId(respond.data._id);

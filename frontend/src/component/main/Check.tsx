@@ -31,7 +31,7 @@ function Check() {
   const [reservation, setReservation] = useState<customer[]>([]);
   const getData = async () => {
     const data = await axios.get(
-      `http://localhost:3002/getReserved/${reservationsCode}`
+      `https://reservation-snjh.onrender.com/getReserved/${reservationsCode}`
     );
     if (data.status === 200) {
       setReservation([data.data]);
