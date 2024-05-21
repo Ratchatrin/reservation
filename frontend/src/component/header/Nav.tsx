@@ -72,9 +72,9 @@ function Nav() {
                     Drinks
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a>Location</a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </>
@@ -93,7 +93,7 @@ function Nav() {
               >
                 <p>Drinks</p>
               </a>
-              <p>Locations</p>
+              {/* <p>Locations</p> */}
               <Link to="/reservations">
                 <p>Reservations</p>
               </Link>
