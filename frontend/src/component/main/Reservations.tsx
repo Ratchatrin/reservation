@@ -29,6 +29,7 @@ function Reservations() {
   const [time, setTime] = useState(String);
   const [complete, setComplete] = useState(false);
   const [customerId, setCustomerId] = useState(String);
+  const [loading, setLoading] = useState(false);
   const reservation = async () => {
     if (
       name &&
@@ -40,6 +41,7 @@ function Reservations() {
       area &&
       time
     ) {
+      setLoading(true);
       const reservationDate: date = {
         name: name,
         phone: phone,
@@ -50,7 +52,6 @@ function Reservations() {
         area: area,
         time: time,
       };
-
       const respond = await axios.post(
         "https://reservation-snjh.onrender.com/reserved",
         reservationDate
@@ -60,13 +61,13 @@ function Reservations() {
         setReservedComplete(true);
       }
     } else {
+      setLoading(false);
       setComplete(true);
       setTimeout(() => {
         setComplete(false);
       }, 2000);
     }
   };
-  console.log(customerId);
   return (
     <div className="flex flex-col h-full w-full justify-between items-center">
       <Nav></Nav>
@@ -120,7 +121,7 @@ function Reservations() {
                 <input
                   type="number"
                   placeholder="Phone Number"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered w-full max-w-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   onChange={(ev) => {
                     setPhone(ev.target.value);
                   }}
@@ -212,39 +213,67 @@ function Reservations() {
                 </label>
               </div>
               <div className="h-60 flex justify-center">
-                {complete ? (
+                {loading ? (
                   <>
                     <div
                       role="alert"
-                      className="alert alert-error mb-5 p-2 w-11/12 mt-5 h-fit"
+                      className="alert alert-info mb-5 p-5 w-full mt-5 h-fit"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="stroke-current shrink-0 h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
+                        className="stroke-current shrink-0 w-6 h-6"
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
-                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
                       </svg>
-                      <span>
-                        Please complete all fields before submitting your
-                        reservation..
-                      </span>
+                      <span>Loading ... </span>
                     </div>
                   </>
                 ) : (
                   <>
-                    <button
-                      className="btn btn-success text-white mt-5 mb-5"
-                      onClick={reservation}
-                    >
-                      Submit
-                    </button>
+                    {complete ? (
+                      <>
+                        <div
+                          role="alert"
+                          className="alert alert-error mb-5 p-2 w-8/12 mt-5 h-fit border-none"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="stroke-current shrink-0 h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          <span>
+                            Please complete all fields before submitting your
+                            reservation.
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="btn btn-success text-white mt-5 mb-5"
+                          onClick={() => {
+                            reservation();
+                          }}
+                        >
+                          Submit
+                        </button>
+                      </>
+                    )}
                   </>
                 )}
               </div>
