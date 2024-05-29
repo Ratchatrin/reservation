@@ -5,7 +5,7 @@ import Customer from "./model/customer.model.js";
 const app = express();
 app.use(json());
 app.use(cors());
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5050;
 mongoose
   .connect(
     "mongodb+srv://ratchatrin12:QpACmHJUWMCJBLIl@cluster0.cayleoy.mongodb.net/reserved?retryWrites=true&w=majority&appName=Cluster0"
